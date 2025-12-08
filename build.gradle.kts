@@ -15,11 +15,18 @@ repositories {
 }
 
 dependencies {
-  implementation("org.apache.hadoop:hadoop-client:3.3.6")
-  implementation("org.apache.hadoop:hadoop-common:3.3.6")
-  implementation("org.apache.hadoop:hadoop-hdfs:3.3.6")
-  implementation("org.apache.hadoop:hadoop-mapreduce-client-core:3.3.6")
-  implementation("org.apache.hadoop:hadoop-mapreduce-client-common:3.3.6")
-  implementation("org.apache.hadoop:hadoop-mapreduce-client-jobclient:3.3.6")
-  implementation("com.opencsv:opencsv:5.9")
+  val hadoop_version = "3.4.2"
+
+  implementation("org.apache.hadoop:hadoop-common:${hadoop_version}")
+  implementation("org.apache.hadoop:hadoop-mapreduce-client-core:${hadoop_version}")
+  implementation("org.apache.hadoop:hadoop-hdfs:${hadoop_version}")
+  implementation("org.apache.hadoop:hadoop-mapreduce-client-common:${hadoop_version}")
+  implementation("org.apache.hadoop:hadoop-mapreduce-client-jobclient:${hadoop_version}")
+}
+
+tasks.jar {
+  archiveFileName.set("app.jar")
+  manifest {
+    attributes["Main-Class"] = "WordCount"
+  }
 }
